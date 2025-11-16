@@ -1,33 +1,184 @@
-@import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;700&display=swap');
 
 :root {
-    --primary-color: #007A7A;
-    --secondary-color: #2c3e50;
-    --background-color: #F4F7F6;
-    --card-bg-color: #FFFFFF;
-    --text-color: #333;
-    --border-color: #e0e0e0;
-    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --primary-color: #00796b;
+    --primary-light: #e0f2f1;
+    --accent-color: #26a69a;
+    --secondary-color: #b2dfdb;
+    --background-color: #f7fafc;
+    --card-background: #ffffff;
+    --text-primary: #1a202c;
+    --text-secondary: #718096;
+
+    --border-color: #e2e8f0;
+    --border-radius: 12px;
+    --card-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.07), 0 2px 4px -1px rgba(0, 0, 0, 0.04);
+    --card-shadow-hover: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
 }
 
 body {
-    font-family: 'Sarabun', sans-serif;
+    font-family: 'Prompt', sans-serif;
     background-color: var(--background-color);
-    color: var(--text-color);
+    color: var(--text-primary);
     margin: 0;
     padding: 0;
+    line-height: 1;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
 
-#app {
-    max-width: 1280px;
+.container {
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2rem;
 }
 
-.container {
+header {
+    background-color: var(--primary-color);
+    color: var(--primary-light);
+    padding: 1.5rem 0;
+    text-align: center;
+    border-bottom: 1px solid var(--border-color);
+}
+
+header h1 {
+    margin: 0;
+    font-weight: 500;
+    font-size: 1.75rem;
+}
+
+.controls {
+    margin: 2rem 0;
     display: flex;
-    flex-direction: column;
-    gap: 2rem;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.controls label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.controls select {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-size: 1rem;
+    background-color: var(--card-background);
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.controls select:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(0, 121, 107, 0.2);
+}
+
+.summary-section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.summary-card {
+    background-color: var(--card-background);
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    border-left: 5px solid var(--accent-color);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--card-shadow-hover);
+}
+
+.summary-card h3 {
+    margin-top: 0;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    font-weight: 500;
+}
+
+.summary-card p {
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0.25rem 0 0 0;
+}
+
+.content-section {
+    background-color: var(--card-background);
+    padding: 2rem;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+    margin-bottom: 2rem;
+}
+
+.content-section h2 {
+    margin-top: 0;
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-light);
+    padding-bottom: 0.75rem;
+    margin-bottom: 1.5rem;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 1rem;
+}
+
+th,
+td {
+    padding: 1rem 0.75rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+thead th {
+    background-color: transparent;
+    color: var(--text-secondary);
+    font-weight: 700;
+    font-size: 0.875rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tbody tr:hover {
+    background-color: var(--primary-light);
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 1.5rem 1rem;
+    }
+
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+        justify-content: flex-start;
+    }
+
+    .controls select {
+        width: 100%;
+    }
+
+    .content-section,
+    .summary-card {
+        padding: 1.5rem;
+    }
+
+    .summary-card p {
+        font-size: 1.75rem;
+    }
+
+    th,
+    td {
+        padding: 0.75rem 0.5rem;
+    }
 }
