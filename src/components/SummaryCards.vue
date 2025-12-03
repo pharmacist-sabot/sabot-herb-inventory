@@ -11,17 +11,22 @@
     </div>
 </template>
 
-<script setup>
-import { defineProps } from 'vue';
+<script setup lang="ts">
+import type { HerbSummary } from "@/services/herbsService";
 
-const props = defineProps({
-    summary: {
-        type: Object,
-        required: true
-    }
-});
+// Define Props with Types
+defineProps<{
+    summary: HerbSummary;
+}>();
 
-const formatCurrency = (value) => {
-    return new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(value);
+const formatCurrency = (value: number): string => {
+    return new Intl.NumberFormat("th-TH", {
+        style: "currency",
+        currency: "THB",
+    }).format(value);
 };
 </script>
+
+<style scoped>
+/* Styles remain the same, relying on global CSS or scoped if preferred */
+</style>

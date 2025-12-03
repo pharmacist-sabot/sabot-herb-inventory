@@ -7,39 +7,57 @@
     </div>
 </template>
 
-<script setup>
-import { Bar } from 'vue-chartjs';
-import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale } from 'chart.js';
-import { computed } from 'vue';
+<script setup lang="ts">
+import { computed } from "vue";
+import { Bar } from "vue-chartjs";
+import {
+    Chart as ChartJS,
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+    type ChartOptions,
+    type ChartData,
+} from "chart.js";
+import type { HerbItem } from "@/services/herbsService";
 
-ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale);
+// Register ChartJS components
+ChartJS.register(
+    Title,
+    Tooltip,
+    Legend,
+    BarElement,
+    CategoryScale,
+    LinearScale,
+);
 
-const props = defineProps({
-    herbs: {
-        type: Array,
-        required: true
-    }
-});
+const props = defineProps<{
+    herbs: HerbItem[];
+}>();
 
-const chartData = computed(() => {
-    const labels = props.herbs.map(h => h.name);
-    const data = props.herbs.map(h => h.totalValue);
+// Strongly typed Computed Property
+const chartData = computed<ChartData<"bar">>(() => {
+    const labels = props.herbs.map((h) => h.name);
+    const data = props.herbs.map((h) => h.totalValue);
 
     return {
         labels: labels,
         datasets: [
             {
-                label: 'มูลค่า (บาท)',
-                backgroundColor: '#26a69a', /* var(--accent-color) */
-                borderColor: '#e0f2f1',     /* var(--primary-color) */
+                label: "มูลค่า (บาท)",
+                backgroundColor: "#26a69a",
+                borderColor: "#e0f2f1",
                 borderWidth: 1,
-                data: data
-            }
-        ]
+                data: data,
+            },
+        ],
     };
 });
 
-const chartOptions = {
+// Strongly typed Options
+const chartOptions: ChartOptions<"bar"> = {
     responsive: true,
     maintainAspectRatio: false,
     scales: {
@@ -47,30 +65,33 @@ const chartOptions = {
             beginAtZero: true,
             ticks: {
                 callback: function (value) {
-                    return new Intl.NumberFormat('th-TH').format(value);
-                }
-            }
-        }
+                    return new Intl.NumberFormat("th-TH").format(Number(value));
+                },
+            },
+        },
     },
     plugins: {
         legend: {
-            display: false
+            display: false,
         },
         tooltip: {
             callbacks: {
                 label: function (context) {
-                    let label = context.dataset.label || '';
+                    let label = context.dataset.label || "";
                     if (label) {
-                        label += ': ';
+                        label += ": ";
                     }
                     if (context.parsed.y !== null) {
-                        label += new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(context.parsed.y);
+                        label += new Intl.NumberFormat("th-TH", {
+                            style: "currency",
+                            currency: "THB",
+                        }).format(context.parsed.y);
                     }
                     return label;
-                }
-            }
-        }
-    }
+                },
+            },
+        },
+    },
 };
 </script>
 

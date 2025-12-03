@@ -20,17 +20,17 @@
     </div>
 </template>
 
-<script setup>
-import { defineProps } from 'vue';
+<script setup lang="ts">
+import type { HerbItem } from "@/services/herbsService";
 
-const props = defineProps({
-    herbs: {
-        type: Array,
-        required: true
-    }
-});
+defineProps<{
+    herbs: HerbItem[];
+}>();
 
-const formatCurrency = (value) => {
-    return new Intl.NumberFormat('th-TH', { style: 'currency', currency: 'THB' }).format(value);
+const formatCurrency = (value: number): string => {
+    return new Intl.NumberFormat("th-TH", {
+        style: "currency",
+        currency: "THB",
+    }).format(value);
 };
 </script>
