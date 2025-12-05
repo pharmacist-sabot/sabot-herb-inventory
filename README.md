@@ -28,12 +28,12 @@ The primary goal is to help hospital staff or administrators quickly grasp key m
 
 ## ✨ Features
 
--   **Data Visualization:** Utilizes **Chart.js** to render a bar chart displaying the top 10 herbal medicines by total purchase value.
--   **Dynamic Summaries:** Features summary cards that show high-level metrics, like the total purchase value for the selected year.
--   **Yearly Data Filtering:** Allows users to easily switch between different fiscal years to analyze historical data.
--   **Google Sheets Backend:** Employs a lightweight and maintainable backend using Google Apps Script, which serves data directly from a Google Sheet.
--   **Centralized State Management:** Manages application state, including data fetching and filtering logic, with **Pinia**.
--   **Responsive Interface:** A clean and simple UI that focuses on data presentation.
+- **Data Visualization:** Utilizes **Chart.js** to render a bar chart displaying the top 10 herbal medicines by total purchase value.
+- **Dynamic Summaries:** Features summary cards that show high-level metrics, like the total purchase value for the selected year.
+- **Yearly Data Filtering:** Allows users to easily switch between different fiscal years to analyze historical data.
+- **Google Sheets Backend:** Employs a lightweight and maintainable backend using Google Apps Script, which serves data directly from a Google Sheet.
+- **Centralized State Management:** Manages application state, including data fetching and filtering logic, with **Pinia**.
+- **Responsive Interface:** A clean and simple UI that focuses on data presentation.
 
 ## 🛠️ Built With the Tools and Technologies:
 
@@ -52,18 +52,20 @@ To get a local copy up and running, follow these simple steps.
 
 ### Prerequisites
 
--   Node.js (v18 or higher)
--   npm (or any other package manager)
+- Node.js (v18 or higher)
+- npm (or any other package manager)
 
 ### Installation
 
 1.  **Clone the repository:**
+
     ```sh
     git clone https://github.com/pharmacist-sabot/sabot-herb-inventory.git
     cd sabot-herb-inventory
     ```
 
 2.  **Install NPM packages:**
+
     ```sh
     bun install
     ```
@@ -76,6 +78,6 @@ To get a local copy up and running, follow these simple steps.
 
 ## 📜 Available Scripts
 
--   `bun dev`: Starts the development server.
--   `bun build`: Builds the app for production.
--   `bun preview`: Previews the production build locally.
+- `bun dev`: Starts the development server.
+- `bun build`: Builds the app for production.
+- `bun preview`: Previews the production build locally.
