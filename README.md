@@ -1,83 +1,161 @@
-<div align="center">
+# Herbal Purchase Value Dashboard
 
-# **Herbal Purchase Value Dashboard**
+![CI Quality](https://img.shields.io/badge/Status-Active-success?style=flat-square)
+[![Vue](https://img.shields.io/badge/Vue-3.5+-4FC08D?logo=vue.js)](https://vuejs.org/)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.9+-3178C6?logo=typescript)](https://www.typescriptlang.org/)
+[![Vite](https://img.shields.io/badge/Vite-7.0+-646CFF?logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.1+-06B6D4?logo=tailwindcss)](https://tailwindcss.com/)
+[![Bun](https://img.shields.io/badge/Bun-1.0+-000000?logo=bun)](https://bun.sh/)
+[![License](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 
-### _A data visualization dashboard for tracking and analyzing the procurement value of herbal medicines at Sabot Hospital._
+> **A data visualization dashboard for tracking and analyzing the procurement value of herbal medicines at Sabot Hospital.**
 
-<br>
-
-<p>
-  <a href="https://github.com/pharmacist-sabot/sabot-herb-inventory/commits/main">
-    <img src="https://img.shields.io/github/last-commit/pharmacist-sabot/sabot-herb-inventory?style=for-the-badge&color=blue&logo=github" alt="Last Commit">
-  </a>
-  <a href="https://github.com/pharmacist-sabot/sabot-herb-inventory">
-    <img src="https://img.shields.io/github/languages/top/pharmacist-sabot/sabot-herb-inventory?style=for-the-badge&color=yellow&logo=javascript" alt="Top Language">
-  </a>
-  <a href="https://github.com/pharmacist-sabot/sabot-herb-inventory">
-    <img src="https://img.shields.io/github/languages/count/pharmacist-sabot/sabot-herb-inventory?style=for-the-badge&color=informational" alt="Language Count">
-  </a>
-</p>
-
-</div>
+This application provides actionable insights into purchasing trends, helping hospital staff and administrators identify key metrics such as total annual purchase value and top-performing herbal products.
 
 ---
 
-This repository contains the source code for a web-based dashboard designed to provide insights into the purchasing trends of herbal medicines. The application fetches data from a **Google Apps Script** backend (powered by a Google Sheet) and presents it in an easy-to-understand visual format.
-
-The primary goal is to help hospital staff or administrators quickly grasp key metrics, such as the total annual purchase value and identify the most frequently ordered herbal products.
-
 ## ✨ Features
 
-- **Data Visualization:** Utilizes **Chart.js** to render a bar chart displaying the top 10 herbal medicines by total purchase value.
-- **Dynamic Summaries:** Features summary cards that show high-level metrics, like the total purchase value for the selected year.
-- **Yearly Data Filtering:** Allows users to easily switch between different fiscal years to analyze historical data.
-- **Google Sheets Backend:** Employs a lightweight and maintainable backend using Google Apps Script, which serves data directly from a Google Sheet.
-- **Centralized State Management:** Manages application state, including data fetching and filtering logic, with **Pinia**.
-- **Responsive Interface:** A clean and simple UI that focuses on data presentation.
+### 📊 Data Visualization
 
-## 🛠️ Built With the Tools and Technologies:
+- **Interactive Charts**: Powered by **[Chart.js](https://www.chartjs.org/)**, visualize the top 10 herbal medicines by total purchase value.
+- **Dynamic Summaries**: Real-time summary cards displaying high-level metrics for the selected fiscal year.
 
-<p align="center">
-  <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vue.js&logoColor=4FC08D" alt="Vue.js">
-  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite">
-  <img src="https://img.shields.io/badge/Pinia-FFD859?style=for-the-badge&logo=pinia&logoColor=black" alt="Pinia">
-  <img src="https://img.shields.io/badge/Chart.js-FF6384?style=for-the-badge&logo=chart.js&logoColor=white" alt="Chart.js">
-  <img src="https://img.shields.io/badge/Google_Apps_Script-4285F4?style=for-the-badge&logo=google&logoColor=white" alt="Google Apps Script">
-  <img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript">
-</p>
+### ⚡️ Core Stack
+
+- **[Vue 3.5+](https://vuejs.org/)**: Utilizing the Composition API with `<script setup>` for concise and performant components.
+- **[TypeScript 5.9+](https://www.typescriptlang.org/)**: Configured for type safety and developer productivity.
+- **[Vite 7](https://vitejs.dev/)**: Next-generation frontend tooling with instant server start and lightning-fast HMR.
+- **[Tailwind CSS 4.1](https://tailwindcss.com/)**: Utility-first CSS framework for rapid UI development.
+
+### 🧩 Architecture
+
+- **[Pinia](https://pinia.vuejs.org/)**: Intuitive, type-safe state management for handling data fetching and filtering logic.
+- **Google Sheets Backend**: A lightweight, maintenance-free backend using **Google Apps Script** to serve data directly from Google Sheets.
+- **[Zod](https://zod.dev/)**: Schema declaration and validation to ensure data integrity from the API.
+
+---
+
+## 💻 IDE Setup
+
+For the best experience, we recommend **[VS Code](https://code.visualstudio.com/)** with the following configuration:
+
+1.  **Install Extensions**:
+    - [Vue - Official](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (formerly Volar)
+    - [Tailwind CSS IntelliSense](https://marketplace.visualstudio.com/items?itemName=bradlc.vscode-tailwindcss)
+    - [ESLint](https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint)
+
+2.  **Workspace Settings**:
+    Ensure your editor is configured to auto-fix lint errors on save and use the workspace TypeScript version.
+
+---
+
+## 📋 Prerequisites
+
+Ensure your environment meets the following requirements:
+
+| Requirement | Version | Note                                          |
+| :---------- | :------ | :-------------------------------------------- |
+| **Node.js** | `18+`   | Required for modern build tools.              |
+| **Bun**     | `1.0+`  | Preferred package manager (lockfile present). |
+
+---
 
 ## 🚀 Getting Started
 
-To get a local copy up and running, follow these simple steps.
+### 1. Clone the repository
 
-### Prerequisites
+```bash
+git clone https://github.com/pharmacist-sabot/sabot-herb-inventory.git
+cd sabot-herb-inventory
+```
 
-- Node.js (v18 or higher)
-- npm (or any other package manager)
+### 2. Install dependencies
 
-### Installation
+```bash
+bun install
+```
 
-1.  **Clone the repository:**
+### 3. Start development server
 
-    ```sh
-    git clone https://github.com/pharmacist-sabot/sabot-herb-inventory.git
-    cd sabot-herb-inventory
-    ```
+```bash
+bun dev
+```
 
-2.  **Install NPM packages:**
+The application will be available at `http://localhost:5173/`.
 
-    ```sh
-    bun install
-    ```
+> **Note:** No environment variables are required for local development as the Google Apps Script API endpoint is public.
 
-3.  **Run the development server:**
-    ```sh
-    bun dev
-    ```
-    The application will be available at `http://localhost:5173`. No environment variables are required as the Google Apps Script API endpoint is public.
+---
 
 ## 📜 Available Scripts
 
-- `bun dev`: Starts the development server.
-- `bun build`: Builds the app for production.
-- `bun preview`: Previews the production build locally.
+| Script         | Description                               |
+| :------------- | :---------------------------------------- |
+| `bun dev`      | Start the development server with HMR.    |
+| `bun build`    | Run type-checks and build for production. |
+| `bun preview`  | Preview the production build locally.     |
+| `bun lint`     | Lint and format all files.                |
+| `bun lint:fix` | Auto-fix linting and formatting issues.   |
+
+---
+
+## 📁 Project Structure
+
+```text
+.
+├── .vscode/             # VS Code workspace settings
+├── src/
+│   ├── assets/          # Static assets
+│   ├── components/      # Reusable UI components
+│   ├── composables/     # Shared logic (Vue Composables)
+│   ├── router/          # Routing configuration
+│   ├── stores/          # Global state management (Pinia)
+│   ├── types/           # TypeScript type definitions
+│   ├── views/           # Page-level components
+│   ├── App.vue          # Root component
+│   └── main.ts          # Application entry point
+├── eslint.config.mjs    # ESLint configuration
+├── tailwind.config.js   # Tailwind CSS configuration (if applicable)
+├── tsconfig.json        # TypeScript configuration
+└── vite.config.ts       # Vite configuration
+```
+
+---
+
+## 🚢 Deployment
+
+### Static Hosting (Vercel, Netlify, etc.)
+
+This project builds a static SPA.
+
+1. **Build Command**: `bun build`
+2. **Output Directory**: `dist`
+3. **Node Version**: `18.x` or higher
+
+### Docker
+
+1. Build the image:
+   ```bash
+   docker build -t herb-dashboard .
+   ```
+2. Run the container:
+   ```bash
+   docker run -p 8080:80 herb-dashboard
+   ```
+
+---
+
+## 🤝 Contributing
+
+1.  **Fork** the repository.
+2.  **Create** a feature branch: `git checkout -b feat/my-feature`.
+3.  **Commit** your changes: `git commit -m "feat: add amazing feature"`.
+4.  **Push** to the branch: `git push origin feat/my-feature`.
+5.  **Open** a Pull Request.
+
+---
+
+## 📄 License
+
+This project is licensed under the [MIT License](LICENSE).
