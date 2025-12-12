@@ -32,4 +32,9 @@ export default antfu({
       ignore: ['README.md'],
     }],
   },
+}, {
+  files: ['**/*.d.ts'],
+  rules: {
+    'ts/consistent-type-definitions': 'off',
+  },
 });
