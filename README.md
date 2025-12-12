@@ -133,17 +133,6 @@ This project builds a static SPA.
 2. **Output Directory**: `dist`
 3. **Node Version**: `18.x` or higher
 
-### Docker
-
-1. Build the image:
-   ```bash
-   docker build -t herb-dashboard .
-   ```
-2. Run the container:
-   ```bash
-   docker run -p 8080:80 herb-dashboard
-   ```
-
 ---
 
 ## 🤝 Contributing
