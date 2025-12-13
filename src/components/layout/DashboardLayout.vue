@@ -22,7 +22,10 @@ const sidebarOpen = ref(false);
 
         <hr class="border-transparent bg-linear-to-r from-transparent via-gray-200 to-transparent h-px mb-6 mx-2">
 
-        <nav class="flex-1 space-y-1 overflow-y-auto scrollbar-none">
+        <nav
+          class="flex-1 space-y-1 overflow-y-auto scrollbar-none"
+          aria-label="Main Navigation"
+        >
           <a
             href="#"
             class="flex items-center gap-4 px-4 py-3 bg-white shadow-muse-sm rounded-xl transition-all hover:shadow-md group"
@@ -61,7 +64,10 @@ const sidebarOpen = ref(false);
         class="p-4 md:p-6 md:pb-0 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 z-20"
       >
         <div>
-          <nav class="flex items-center gap-2 text-slate-400 text-sm mb-1 font-medium">
+          <nav
+            class="flex items-center gap-2 text-slate-400 text-sm mb-1 font-medium"
+            aria-label="Breadcrumb"
+          >
             <span>Pages</span>
             <span class="text-slate-300">/</span>
             <span class="text-slate-800">Dashboard</span>
