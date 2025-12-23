@@ -1,3 +1,13 @@
+## [1.1.0](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.0.0...v1.1.0) (2025-12-23)
+
+### 🚀 New Features
+
+* **ui:** redesign application UI ([#2](https://github.com/pharmacist-sabot/sabot-herb-inventory/issues/2)) ([c5ff9fe](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/c5ff9fec34f4c884938f46e1e4e53483e71c1283))
+
+### 📦 Dependency Updates
+
+* add MIT license ([d2f341f](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/d2f341f509cb932374d34077301141a63ff33735))
+
 ## 1.0.0 (2025-12-21)
 
 ### 🚀 New Features
