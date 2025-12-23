@@ -112,3 +112,10 @@ body {
 .animate-fade-in {
   animation: fade-in 0.5s ease-out forwards;
 }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-in {
+    animation: none;
+    opacity: 1;
+  }
+}
