@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 
 import type { HerbSummary } from '@/services/herbs-service';
 
 import HerbChart from '@/components/HerbChart.vue';
 import HerbTable from '@/components/HerbTable.vue';
-// Components
 import DashboardLayout from '@/components/layout/DashboardLayout.vue';
 import SummaryCards from '@/components/SummaryCards.vue';
 import herbsService from '@/services/herbs-service';
@@ -37,53 +36,70 @@ async function fetchData() {
 onMounted(() => {
   fetchData();
 });
+
+watch(selectedYear, () => {
+  fetchData();
+});
 </script>
 
 <template>
   <DashboardLayout>
     <template #controls>
-      <label for="year-select" class="text-sm font-semibold text-slate-500 mr-2">เลือกปีที่ต้องการดู:</label>
-      <div class="relative">
-        <select
-          id="year-select" v-model="selectedYear" class="appearance-none bg-transparent border border-gray-300 text-slate-700 text-sm rounded-lg focus:ring-primary focus:border-primary block w-full p-2 pr-8 cursor-pointer font-bold"
-          @change="fetchData"
-        >
-          <option v-for="year in availableYears" :key="year" :value="year">
-            {{ year }}
-          </option>
-        </select>
-        <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-slate-500">
-          <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-            <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-          </svg>
+      <div class="flex items-center gap-3">
+        <label for="year-select" class="text-sm font-medium text-text-secondary hidden sm:block">
+          ปีงบประมาณ:
+        </label>
+        <div class="relative group">
+          <select
+            id="year-select"
+            v-model="selectedYear"
+            class="appearance-none bg-surface border border-border text-text-primary text-sm rounded-lg focus:ring-2 focus:ring-primary/20 focus:border-primary block w-full py-2 pl-4 pr-10 cursor-pointer font-medium shadow-sm hover:border-primary/50 transition-colors"
+          >
+            <option v-for="year in availableYears" :key="year" :value="year">
+              {{ year }}
+            </option>
+          </select>
+          <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-text-muted group-hover:text-primary transition-colors">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </div>
         </div>
       </div>
     </template>
 
-    <!-- Main Content Body -->
-    <div v-if="loading" class="flex flex-col items-center justify-center h-96 text-slate-400">
-      <svg
-        class="animate-spin h-10 w-10 mb-4 text-primary" xmlns="http://www.w3.org/2000/svg" fill="none"
-        viewBox="0 0 24 24"
-      >
-        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" />
-        <path
-          class="opacity-75" fill="currentColor"
-          d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
-        />
-      </svg>
-      <p>กำลังประมวลผลข้อมูล...</p>
+    <div v-if="loading" class="flex flex-col items-center justify-center h-96">
+      <div class="relative">
+        <div class="w-12 h-12 rounded-full border-4 border-border-muted" />
+        <div class="absolute inset-0 w-12 h-12 rounded-full border-4 border-transparent border-t-primary animate-spin" />
+      </div>
+      <p class="mt-4 text-text-muted font-medium text-sm animate-pulse">
+        กำลังโหลดข้อมูล...
+      </p>
     </div>
 
-    <div v-else-if="error" class="bg-red-50 border border-red-200 text-red-600 rounded-2xl p-6 text-center shadow-sm">
-      <p class="font-bold">
+    <div
+      v-else-if="error"
+      class="bg-error-bg border border-error/20 text-error rounded-2xl p-8 text-center shadow-sm max-w-md mx-auto mt-10 animate-fade-in"
+    >
+      <div class="w-12 h-12 mx-auto mb-4 bg-error/10 rounded-full flex items-center justify-center">
+        <svg class="w-6 h-6 text-error" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h3 class="font-bold text-lg mb-2 text-text-primary">
         เกิดข้อผิดพลาด
+      </h3>
+      <p class="text-text-secondary mb-6 text-sm">
+        {{ error }}
       </p>
-      <p>{{ error }}</p>
       <button
-        class="mt-4 px-4 py-2 bg-red-100 hover:bg-red-200 rounded-lg text-sm font-semibold transition-colors"
+        class="inline-flex items-center gap-2 px-4 py-2 bg-white border border-border hover:bg-bg-alt text-text-primary rounded-lg text-sm font-medium transition-colors shadow-sm"
         @click="fetchData"
       >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+        </svg>
         ลองใหม่อีกครั้ง
       </button>
     </div>
@@ -91,11 +107,11 @@ onMounted(() => {
     <template v-else-if="summaryData">
       <SummaryCards :summary="summaryData" />
 
-      <div class="grid grid-cols-1 lg:grid-cols-5 gap-6 mb-6">
-        <div class="lg:col-span-3">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <div class="h-full">
           <HerbChart :herbs="summaryData.herbs" />
         </div>
-        <div class="lg:col-span-2">
+        <div class="h-full">
           <HerbTable :herbs="summaryData.herbs" />
         </div>
       </div>

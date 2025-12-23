@@ -25,3 +25,10 @@ dist-ssr
 
 # Environment variables
 .env
+
+#tsconfig
+tsconfig*
+
+#vite.config
+vite.config.d.ts
+vite.config.js

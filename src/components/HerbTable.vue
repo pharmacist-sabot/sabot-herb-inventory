@@ -9,62 +9,97 @@ function formatCurrency(value: number): string {
   return new Intl.NumberFormat('th-TH', {
     style: 'currency',
     currency: 'THB',
+    minimumFractionDigits: 0,
+    maximumFractionDigits: 0,
   }).format(value);
 }
 </script>
 
 <template>
-  <div class="bg-white rounded-2xl shadow-muse flex flex-col h-[500px] overflow-hidden">
-    <!-- Header Section -->
-    <div class="p-6 pb-4 flex-none border-b border-gray-50 z-20 bg-white">
-      <h6 class="font-bold text-slate-700">
-        รายละเอียดรายการยาทั้งหมด
-      </h6>
-      <div class="flex items-center gap-2 mt-1">
-        <span class="w-2 h-2 rounded-full bg-green-500" />
-        <p class="text-sm text-slate-400">
-          รายการจัดซื้อจริง
+  <div class="bg-white rounded-2xl shadow-sm border border-border flex flex-col h-[500px] overflow-hidden">
+    <div class="p-6 border-b border-border flex items-center justify-between bg-white">
+      <div>
+        <h2 class="font-bold text-text-primary text-lg tracking-tight flex items-center gap-2">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+          </svg>
+          จัดลำดับมูลค่าการจัดซื้อยาสมุนไพร
+        </h2>
+        <p class="text-sm text-text-muted mt-1">
+          เรียงลำดับตามมูลค่าการจัดซื้อสูงสุด
         </p>
+      </div>
+
+      <div class="px-3 py-1 bg-slate-100 rounded-full border border-slate-200">
+        <span class="text-xs font-semibold text-slate-600">
+          {{ herbs.length }} รายการ
+        </span>
       </div>
     </div>
 
-    <!-- Table Content with Scroll -->
-    <div class="overflow-y-auto flex-1 scrollbar-thin scrollbar-thumb-gray-200 scrollbar-track-transparent">
+    <div class="overflow-y-auto flex-1 scrollbar-thin">
       <table class="w-full text-left border-collapse">
-        <thead class="sticky top-0 z-10 bg-white shadow-sm">
+        <thead class="sticky top-0 z-10 bg-slate-50 shadow-sm">
           <tr>
-            <th
-              class="px-4 py-3 text-xs font-bold text-slate-400 uppercase bg-gray-50/50 border-b border-gray-100 w-14 text-center"
-            >
-              ลำดับ
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-border w-16 text-center">
+              อันดับ
             </th>
-            <th class="px-4 py-3 text-xs font-bold text-slate-400 uppercase bg-gray-50/50 border-b border-gray-100">
-              ชื่อยาสมุนไพร
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-border">
+              ชื่อรายการยา
             </th>
-            <th
-              class="px-4 py-3 text-xs font-bold text-slate-400 uppercase bg-gray-50/50 border-b border-gray-100 text-right min-w-[120px]"
-            >
-              มูลค่ารวม
+            <th class="px-6 py-4 text-xs font-bold text-slate-500 uppercase tracking-wider border-b border-border text-right">
+              มูลค่าจัดซื้อรวม
             </th>
           </tr>
         </thead>
-        <tbody class="text-slate-600 text-sm">
+        <tbody class="text-text-primary text-sm divide-y divide-border-muted">
           <tr
-            v-for="(herb, index) in herbs" :key="herb.name"
-            class="hover:bg-gray-50 transition-colors last:border-b-0 border-b border-gray-100"
+            v-for="(herb, index) in herbs"
+            :key="herb.name"
+            class="group hover:bg-slate-50 transition-colors"
           >
-            <td class="px-4 py-3 text-slate-400 text-center">
-              {{ index + 1 }}
+            <td class="px-6 py-4 text-center">
+              <div
+                v-if="index < 3"
+                class="inline-flex items-center justify-center w-8 h-8 rounded-lg text-sm font-bold shadow-sm"
+                :class="{
+                  'bg-linear-to-br from-yellow-400 to-amber-600 text-white': index === 0,
+                  'bg-linear-to-br from-slate-300 to-slate-500 text-white': index === 1,
+                  'bg-linear-to-br from-amber-700 to-amber-900 text-white': index === 2,
+                }"
+              >
+                {{ index + 1 }}
+              </div>
+              <span v-else class="text-slate-400 font-medium text-sm">
+                {{ index + 1 }}
+              </span>
             </td>
-            <td class="px-4 py-3 font-semibold text-slate-700">
-              {{ herb.name }}
+
+            <td class="px-6 py-4">
+              <span class="font-semibold text-text-primary group-hover:text-primary transition-colors block">
+                {{ herb.name }}
+              </span>
             </td>
-            <td class="px-4 py-3 font-bold text-slate-700 text-right">
-              {{ formatCurrency(herb.totalValue) }}
+
+            <td class="px-6 py-4 text-right">
+              <span class="font-bold text-text-primary tabular-nums text-base">
+                {{ formatCurrency(herb.totalValue) }}
+              </span>
             </td>
           </tr>
         </tbody>
       </table>
+
+      <div v-if="herbs.length === 0" class="flex flex-col items-center justify-center py-16 text-text-muted">
+        <div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center mb-4">
+          <svg class="w-8 h-8 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+          </svg>
+        </div>
+        <p class="text-sm font-medium">
+          ไม่พบข้อมูล
+        </p>
+      </div>
     </div>
   </div>
 </template>
