@@ -1,82 +1,117 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import type { HerbSummary } from '@/services/herbs-service';
 
-defineProps<{
+const props = defineProps<{
   summary: HerbSummary;
 }>();
 
 function formatCurrency(value: number): string {
   return new Intl.NumberFormat('th-TH').format(value);
 }
+
+const highestValueHerb = computed(() => {
+  if (props.summary.herbs.length === 0) {
+    return null;
+  }
+  return props.summary.herbs.reduce((prev, current) =>
+    (prev.totalValue > current.totalValue) ? prev : current,
+  );
+});
 </script>
 
 <template>
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-    <!-- Card 1: Total Value -->
-    <div class="bg-white rounded-2xl p-4 shadow-muse flex justify-between items-center relative overflow-hidden">
-      <div>
-        <p class="text-sm text-slate-400 font-semibold mb-1">
-          มูลค่ารวม (บาท)
+  <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+    <div class="bg-primary rounded-2xl p-8 text-white shadow-xl relative overflow-hidden group flex flex-col justify-between">
+      <div class="absolute top-0 right-0 w-48 h-48 bg-accent/10 rounded-full blur-3xl -mr-10 -mt-10 pointer-events-none" />
+
+      <div class="relative z-10">
+        <p class="text-slate-400 font-medium uppercase tracking-wider text-sm mb-1">
+          มูลค่าการจัดซื้อยาสมุนไพร
         </p>
-        <h4 class="text-xl font-bold text-slate-700">
-          {{ formatCurrency(summary.grandTotal) }}
-        </h4>
+        <h3 class="text-xl font-semibold text-white mb-6">
+          มูลค่ารวมทั้งหมด
+        </h3>
+
+        <div class="flex items-baseline gap-2">
+          <span class="text-4xl font-bold tracking-tight text-white tabular-nums">
+            {{ formatCurrency(summary.grandTotal) }}
+          </span>
+          <span class="text-lg text-slate-400 font-medium">บาท</span>
+        </div>
       </div>
-      <div class="w-12 h-12 bg-primary rounded-lg shadow-lg flex items-center justify-center text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path
-            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
+
+      <div class="mt-6 flex items-center gap-2 text-sm text-emerald-400 bg-emerald-500/10 w-fit px-3 py-1 rounded-full border border-emerald-500/20">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
         </svg>
+        <span class="font-medium">อัปเดตล่าสุด</span>
       </div>
     </div>
 
-    <!-- Card 2: Total Items -->
-    <div class="bg-white rounded-2xl p-4 shadow-muse flex justify-between items-center">
-      <div>
-        <p class="text-sm text-slate-400 font-semibold mb-1">
-          จำนวนรายการยา
+    <div class="bg-white rounded-2xl p-8 shadow-sm border border-border hover-card relative overflow-hidden flex flex-col justify-between">
+      <div class="absolute right-0 top-0 w-32 h-32 bg-blue-50 rounded-full blur-2xl -mr-10 -mt-10" />
+
+      <div class="relative z-10">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <p class="text-text-secondary text-sm font-medium uppercase tracking-wider">
+              จำนวนรายการยาสมุนไพร
+            </p>
+            <h3 class="text-xl font-semibold text-text-primary">
+              จำนวนรายการ
+            </h3>
+          </div>
+          <div class="w-10 h-10 bg-blue-50 rounded-lg flex items-center justify-center text-blue-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+            </svg>
+          </div>
+        </div>
+
+        <p class="text-4xl font-bold text-text-primary tabular-nums">
+          {{ summary.herbs.length }}
         </p>
-        <h4 class="text-xl font-bold text-slate-700">
-          {{ summary.herbs.length }} <span
-            class="text-sm font-normal"
-          >ชนิด</span>
-        </h4>
-        <p class="text-xs text-slate-400 mt-1">
-          รายการที่มีการสั่งซื้อ
+        <p class="text-sm text-text-muted mt-2">
+          รายการยาที่มีการจัดซื้อ
         </p>
-      </div>
-      <div class="w-12 h-12 bg-secondary rounded-lg shadow-lg flex items-center justify-center text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path
-            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-          />
-        </svg>
       </div>
     </div>
 
-    <!-- Card 3: System Status  -->
-    <div class="bg-white rounded-2xl p-4 shadow-muse flex justify-between items-center">
-      <div>
-        <p class="text-sm text-slate-400 font-semibold mb-1">
-          สถานะระบบ
-        </p>
-        <h4 class="text-xl font-bold text-slate-700">
-          Online
-        </h4>
-        <p class="text-xs text-green-500 font-bold mt-1">
-          เชื่อมต่อแล้ว
-        </p>
-      </div>
-      <div class="w-12 h-12 bg-green-500 rounded-lg shadow-lg flex items-center justify-center text-white">
-        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path
-            stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-            d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"
-          />
-        </svg>
+    <div class="bg-white rounded-2xl p-8 shadow-sm border border-border hover-card relative overflow-hidden flex flex-col justify-between">
+      <div class="absolute right-0 top-0 w-32 h-32 bg-amber-50 rounded-full blur-2xl -mr-10 -mt-10" />
+
+      <div class="relative z-10">
+        <div class="flex justify-between items-start mb-6">
+          <div>
+            <p class="text-text-secondary text-sm font-medium uppercase tracking-wider">
+              มูลค่าจัดซื้อสูงสุด
+            </p>
+            <h3 class="text-xl font-semibold text-text-primary">
+              สมุนไพรมูลค่าจัดซื้อสูงสุด
+            </h3>
+          </div>
+          <div class="w-10 h-10 bg-amber-50 rounded-lg flex items-center justify-center text-amber-600">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+            </svg>
+          </div>
+        </div>
+
+        <div v-if="highestValueHerb">
+          <p class="text-2xl font-bold text-text-primary truncate" :title="highestValueHerb.name">
+            {{ highestValueHerb.name }}
+          </p>
+          <p class="text-lg text-amber-600 mt-1 font-medium">
+            {{ formatCurrency(highestValueHerb.totalValue) }} บาท
+          </p>
+        </div>
+        <div v-else>
+          <p class="text-text-muted">
+            -
+          </p>
+        </div>
       </div>
     </div>
   </div>
