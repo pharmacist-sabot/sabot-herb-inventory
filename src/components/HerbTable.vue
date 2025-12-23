@@ -1,9 +1,15 @@
 <script setup lang="ts">
+import { computed } from 'vue';
+
 import type { HerbItem } from '@/services/herbs-service';
 
-defineProps<{
+const props = defineProps<{
   herbs: HerbItem[];
 }>();
+
+const sortedHerbs = computed(() => {
+  return [...props.herbs].sort((a, b) => b.totalValue - a.totalValue);
+});
 
 function formatCurrency(value: number): string {
   return new Intl.NumberFormat('th-TH', {
@@ -54,7 +60,7 @@ function formatCurrency(value: number): string {
         </thead>
         <tbody class="text-text-primary text-sm divide-y divide-border-muted">
           <tr
-            v-for="(herb, index) in herbs"
+            v-for="(herb, index) in sortedHerbs"
             :key="herb.name"
             class="group hover:bg-slate-50 transition-colors"
           >
