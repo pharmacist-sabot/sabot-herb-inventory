@@ -9,18 +9,34 @@ import DashboardLayout from '@/components/layout/DashboardLayout.vue';
 import SummaryCards from '@/components/SummaryCards.vue';
 import herbsService from '@/services/herbs-service';
 
+// ฟังก์ชันคำนวณปีงบประมาณปัจจุบัน (พ.ศ.)
+function getCurrentThaiFiscalYear(): number {
+  const today = new Date();
+  const month = today.getMonth(); // 0-11
+  const yearAD = today.getFullYear();
+
+  // ถ้าเดือน >= ต.ค. (9) ให้ถือเป็นปีงบประมาณหน้า (AD)
+  const fiscalYearAD = month >= 9 ? yearAD + 1 : yearAD;
+  
+  // แปลงเป็น พ.ศ. (+543)
+  return fiscalYearAD + 543;
+}
+
 // State
-const selectedYear = ref<number>(new Date().getFullYear());
+const currentThaiYear = getCurrentThaiFiscalYear();
+const selectedYear = ref<number>(currentThaiYear);
 const summaryData = ref<HerbSummary | null>(null);
 const loading = ref<boolean>(true);
 const error = ref<string | null>(null);
 
-const availableYears = Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i);
+// สร้างรายการปี พ.ศ. ย้อนหลัง 5 ปี (เช่น 2568, 2567, 2566...)
+const availableYears = Array.from({ length: 5 }, (_, i) => currentThaiYear - i);
 
 async function fetchData() {
   loading.value = true;
   error.value = null;
   try {
+    // ส่งปี พ.ศ. ไปที่ Backend
     const data = await herbsService.getHerbSummary(selectedYear.value);
     summaryData.value = data;
   }
@@ -47,7 +63,7 @@ watch(selectedYear, () => {
     <template #controls>
       <div class="flex items-center gap-3">
         <label for="year-select" class="text-sm font-medium text-text-secondary hidden sm:block">
-          ปีงบประมาณ:
+          ปีงบประมาณ (พ.ศ.):
         </label>
         <div class="relative group">
           <select
