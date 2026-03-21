@@ -1,3 +1,13 @@
+## [1.1.1](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.1.0...v1.1.1) (2026-03-21)
+
+### 📝 Documentation
+
+* update README formatting and section headers ([f8fd7c5](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/f8fd7c5c790c921a84c16741967fac275df1ecfe))
+
+### 📦 Dependency Updates
+
+* update fiscal year calculation and UI labels ([009aeb1](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/009aeb1aa651b3807e1bf923eae65e30a0e96ad3))
+
 ## [1.1.0](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.0.0...v1.1.0) (2025-12-23)
 
 ### 🚀 New Features
