@@ -1,3 +1,9 @@
+## [1.1.3](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.1.2...v1.1.3) (2026-04-16)
+
+### 📦 Dependency Updates
+
+* **deps:** update oven-sh/setup-bun action to v2.2.0 ([#5](https://github.com/pharmacist-sabot/sabot-herb-inventory/issues/5)) ([bdbd5cb](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/bdbd5cb7fba5df36e4b18c4d657209d61042132f))
+
 ## [1.1.2](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.1.1...v1.1.2) (2026-04-16)
 
 ### 📦 Dependency Updates
