@@ -1,3 +1,11 @@
+## [1.1.2](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.1.1...v1.1.2) (2026-04-16)
+
+### 📦 Dependency Updates
+
+* **bot:** config Renovate ([#3](https://github.com/pharmacist-sabot/sabot-herb-inventory/issues/3)) ([7094465](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/7094465c9a5f6d3ac22c34a93c6d8309f005e9f8))
+* **deps:** update dependency bun to v1.3.12 ([#4](https://github.com/pharmacist-sabot/sabot-herb-inventory/issues/4)) ([3cde5fe](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/3cde5feb198553fffbd6294217a8f1aef042cc13))
+* fix formatting in fiscal year calculation ([3621ec5](https://github.com/pharmacist-sabot/sabot-herb-inventory/commit/3621ec52fec0a692c57cad091906eba7b420f41c))
+
 ## [1.1.1](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.1.0...v1.1.1) (2026-03-21)
 
 ### 📝 Documentation
