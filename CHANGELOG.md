@@ -1,3 +1,9 @@
+## [1.1.7](https://github.com/suradet-ps/sabot-herb-inventory/compare/v1.1.6...v1.1.7) (2026-04-23)
+
+### 📦 Dependency Updates
+
+* **deps:** update dependency bun to v1.3.13 ([#15](https://github.com/suradet-ps/sabot-herb-inventory/issues/15)) ([0d82e12](https://github.com/suradet-ps/sabot-herb-inventory/commit/0d82e129ce35c9d27a2ec43d8185d2f15664b690))
+
 ## [1.1.6](https://github.com/pharmacist-sabot/sabot-herb-inventory/compare/v1.1.5...v1.1.6) (2026-04-18)
 
 ### 📦 Dependency Updates
